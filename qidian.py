@@ -7,6 +7,7 @@ from requests.exceptions import RequestException
 import pprint
 
 
+
 def get_page(url):
     try:
         res = requests.get(url)
@@ -35,13 +36,19 @@ def get_next_page(page_number):
     return url
 
 
+def write_to_file(content):
+    with open('qidian.txt', 'a', encoding='utf-8') as f:
+        f.write(str(content) + '\n')
+        f.close()
+
 
 def main():
-    for i in range(20):
+    for i in range(40):
         url = get_next_page(i)
         html = get_page(url)
         pprint.pprint(parser_page(html))
-
+        content = parser_page(html)
+        write_to_file(content)
 
 if __name__ == '__main__':
     main()
