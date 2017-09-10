@@ -8,7 +8,7 @@ import pprint
 
 
 
-def get_page(url):
+def get_page(url):  # 获取页面请求
     try:
         res = requests.get(url)
         res.encoding = 'utf-8'
@@ -19,7 +19,7 @@ def get_page(url):
         return None
 
 
-def parser_page(html):
+def parser_page(html):   # 解析页面
     soup = BeautifulSoup(html, 'html.parser')
     books = []
     for i in range(20):
@@ -31,13 +31,13 @@ def parser_page(html):
         books.append(book)
     return books
 
-def get_next_page(page_number):
+def get_next_page(page_number):   # 获得多个页
     url = 'http://a.qidian.com?orderId=&style=1&pageSize=20&siteid=1&hiddenField=0&page={}'.format(page_number)
     return url
 
 
-def write_to_file(content):
-    with open('qidian.txt', 'a', encoding='utf-8') as f:
+def write_to_file(content):   # 存储数据
+    with open('qidian.txt', 'at', encoding='utf-8') as f:
         f.write(str(content) + '\n')
         f.close()
 
